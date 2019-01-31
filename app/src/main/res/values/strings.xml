@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">DEPeat</string>
+    <string name="app_name">My Application</string>
+    <string name="email_hinit">insert mail</string>
+    <string name="telefono_hinit">insert number</string>
+    <string name="password_hinit">insert password</string>
+    <string name="login">login</string>
+    <string name="register">register</string>
+
 </resources>
