@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
     private void convalidation() {
         if (verifyEmail(insMail.getText().toString()) && insPassword.getText().toString().length() > LEN_PASSWORD && insTelefono.getText().length() == LEN_number) {
             register.setEnabled(true);
-        }else
+        } else
             register.setEnabled(false);
 
     }

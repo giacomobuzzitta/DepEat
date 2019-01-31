@@ -19,19 +19,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater  = getMenuInflater();
-        inflater.inflate(R.menu.menu_main,menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == R.id.login_menu){
+        if (item.getItemId() == R.id.login_menu) {
 
-            startActivity(new Intent(this,LoginActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
             return true;
 
+        } else if (item.getItemId() == R.id.checkout_menu) {
+
+            startActivity(new Intent(this, CheckoutActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

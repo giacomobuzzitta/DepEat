@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.depeat.R;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button loginButton, registerButton;
 
@@ -32,14 +32,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_main);
 
 
-
         loginButton = findViewById(R.id.login_btn);
         registerButton = findViewById(R.id.register_batton);
         emailEt = findViewById(R.id.email_Et);
         passwordEt = findViewById(R.id.password_Et);
 
         layout = findViewById(R.id.layout);
-
 
 
         registerButton.setVisibility(View.VISIBLE);
@@ -50,20 +48,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Log.i("LoginActivity", "Activity created");
 
     }
-    private void doLogin(String email){
-        if(verifyEmail(email) && passwordEt.getText().toString().length()>LEN_PASSWORD){
+
+    private void doLogin(String email) {
+        if (verifyEmail(email) && passwordEt.getText().toString().length() > LEN_PASSWORD) {
             showToast("Accesso eseguito!");
 
-        }else{
+        } else {
             showToast("Accesso negato!");
         }
     }
 
     private void showToast(String text) {
-        Toast.makeText(this,text,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 
-    private boolean verifyEmail(String email){
+    private boolean verifyEmail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
@@ -71,12 +70,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         //TODO DO SOMETHING
-        if(v.getId() == R.id.login_btn){
+        if (v.getId() == R.id.login_btn) {
             doLogin(emailEt.getText().toString());  // chiamo il metodo "doLogin" che verifica mail e Fa partire una nuova activity
             //TODO DO LOGIN
 
-        }else if(v.getId() == R.id.register_batton){
-            Intent i = new Intent(this,RegisterActivity.class);
+        } else if (v.getId() == R.id.register_batton) {
+            Intent i = new Intent(this, RegisterActivity.class);
             startActivity(i);
             //TODO GO REGISTER ACTIVITY
         }
