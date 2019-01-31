@@ -1,4 +1,4 @@
-package com.example.depeat;
+package com.example.depeat.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,17 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.depeat.R;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button loginButton, registerButton;
 
@@ -50,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loginButton.setOnClickListener(this);
         registerButton.setOnClickListener(this);
 
-        Log.i("MainActivity", "Activity created");
+        Log.i("LoginActivity", "Activity created");
 
     }
     private void doLogin(String email){

@@ -1,14 +1,14 @@
-package com.example.depeat;
+package com.example.depeat.ui.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.depeat.R;
 
 public class RegisterActivity extends AppCompatActivity implements TextWatcher {
 
