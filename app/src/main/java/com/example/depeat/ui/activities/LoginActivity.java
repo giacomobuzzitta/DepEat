@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Allega queta activity a activity_layout.xml file
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
 
         loginButton = findViewById(R.id.login_btn);
