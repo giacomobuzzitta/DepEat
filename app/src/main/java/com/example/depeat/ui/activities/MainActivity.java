@@ -22,9 +22,11 @@ public class MainActivity extends AppCompatActivity {
     ResturantAdapter adapter;
     ArrayList<Resturant> arrayList;
 
-    Resturant r1 = new Resturant("Forno Impero","Via dei mille","7");
-    Resturant r2 = new Resturant("Il carretto","Via Viale Europa","5");
-    Resturant r3 = new Resturant("Peri peri","Via stazione","7");
+    Resturant r1 = new Resturant("Forno Impero","Indirizzo:Via dei mille","Minimo ordine: $7",R.drawable.a9);
+    Resturant r2 = new Resturant("Il carretto","Indirizzo:Viale Europa","Minimo ordine:$5",R.drawable.a9);
+    Resturant r3 = new Resturant("Peri peri","Indirizzo:Via stazione","Minimo ordine:$7",R.drawable.a9);
+    Resturant r4 = new Resturant("Peri peri","Indirizzo:Via stazione","Minimo ordine:$7",R.drawable.a9);
+    Resturant r5 = new Resturant("Peri peri","Indirizzo:Via stazione","Minimo ordine:$7",R.drawable.a9);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add(r1);
         arrayList.add(r2);
         arrayList.add(r3);
+        arrayList.add(r4);
+        arrayList.add(r5
+        );
 
         return arrayList;
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
