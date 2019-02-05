@@ -1,6 +1,12 @@
 package com.example.depeat.datamodels;
 
+import android.content.Intent;
 import android.support.annotation.DrawableRes;
+import android.view.View;
+
+import com.example.depeat.R;
+import com.example.depeat.ui.activities.RegisterActivity;
+import com.example.depeat.ui.activities.ShopActivity;
 
 public class Resturant {
 
@@ -49,4 +55,5 @@ public class Resturant {
     public void setSrc(int src) {
         this.src = src;
     }
+
 }

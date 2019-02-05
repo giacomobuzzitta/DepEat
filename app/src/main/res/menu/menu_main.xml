@@ -11,4 +11,8 @@
         android:id="@+id/checkout_menu"
         android:title="@string/checkout" />
 
+    <item
+        android:id="@+id/Grid_menu"
+        android:title="@string/Grid" />
+
 </menu>

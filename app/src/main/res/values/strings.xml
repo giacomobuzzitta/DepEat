@@ -6,5 +6,6 @@
     <string name="login">login</string>
     <string name="register">register</string>
     <string name="checkout">Checkout</string>
+    <string name="Grid">Change layout</string>
 
 </resources>
