@@ -12,13 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.depeat.R;
 import com.example.depeat.datamodels.Resturant;
 import com.example.depeat.ui.activities.RegisterActivity;
 import com.example.depeat.ui.activities.ShopActivity;
-
 import java.util.ArrayList;
 
 public class ResturantAdapter extends RecyclerView.Adapter {
@@ -54,11 +52,11 @@ public class ResturantAdapter extends RecyclerView.Adapter {
         vh.resturantName.setText(data.get(pos).getNome());
         vh.resturantIndirizzo.setText(data.get(pos).getIndirizzo());
         vh.resturantMinordine.setText(data.get(pos).getMinOrdine());
-        if (!isGrid) {
+       // if (!isGrid) {
             vh.image_cuoreR.setImageResource(R.drawable.likerosso);
             vh.image_cuoreN.setImageResource(R.drawable.likenero);
             vh.image_resturant.setImageResource(data.get(pos).getSrc());
-        }
+        //}
 
         //Glide.with(context).load()    Caricare immagine da remoto
     }
@@ -81,8 +79,8 @@ public class ResturantAdapter extends RecyclerView.Adapter {
         public TextView resturantIndirizzo;
         public TextView resturantMinordine;
         public ImageView image_resturant, image_cuoreN, image_cuoreR;
-        CardView cardview;
-        Button B_condividi;
+        public CardView cardview;
+        public ImageView B_condividi;
 
 
         public ResturantViewHolder(@NonNull View itemView) {
@@ -94,15 +92,19 @@ public class ResturantAdapter extends RecyclerView.Adapter {
             image_cuoreN = itemView.findViewById(R.id.imageCuoreN);
             image_cuoreR = itemView.findViewById(R.id.imageCuoreR);
             B_condividi = itemView.findViewById(R.id.B_condividi);
-            cardview = itemView.findViewById(R.id.Bmenu);
-            cardview.setOnClickListener(this);
-            B_condividi.setOnClickListener(this);
+
+
 
             itemView.setOnClickListener(this);
-            if (!isGrid) {
+            //if (!isGrid) {
                 image_cuoreN.setOnClickListener(this);
                 image_cuoreR.setOnClickListener(this);
-            }
+
+                cardview = itemView.findViewById(R.id.Bmenu);
+                cardview.setOnClickListener(this);
+
+                B_condividi.setOnClickListener(this);
+           // }
         }
 
         @Override
