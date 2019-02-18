@@ -1,21 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:gravity="center"
     android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/myaccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.25"
+        android:text="@string/my_account"
+        android:textAlignment="center"
+        android:textColor="@color/colorProva"
+        android:textSize="34sp" />
 
     <EditText
         android:id="@+id/email_Et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/myaccount"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="159dp"
         android:hint="@string/email_hinit"
         android:inputType="textEmailAddress"
         android:textAlignment="center" />
 
     <EditText
+        android:layout_below="@+id/email_Et"
         android:id="@+id/password_Et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +50,8 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingTop="10dp">
+        android:paddingTop="10dp"
+        android:layout_below="@+id/password_Et">
 
         <Button
             android:id="@+id/login_btn"
@@ -49,4 +70,4 @@
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

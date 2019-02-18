@@ -1,11 +1,31 @@
 <resources>
-    <string name="app_name">My Application</string>
     <string name="email_hinit">insert mail</string>
     <string name="telefono_hinit">insert number</string>
     <string name="password_hinit">insert password</string>
-    <string name="login">login</string>
-    <string name="register">register</string>
-    <string name="checkout">Checkout</string>
     <string name="Grid">Change layout</string>
+    <string name="Total">Totale: </string>
+    <string name="Out">CHECKOUT</string>
+
+    <string name="app_name">DepEat</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="register">Sign in</string>
+    <string name="error_dimension_pass">Password must be more than six character!</string>
+    <string name="email_failed">Email Failed</string>
+    <string name="show_password">Show Password</string>
+    <string name="operation_success">success</string>
+    <string name="operation_fail">failed</string>
+    <string name="number_phone_registration">Numero di telefono</string>
+    <string name="registrazione">Registrazione</string>
+    <string name="login_menu">Login</string>
+    <string name="checkout">Checkout</string>
+    <string name="registration_success">Registration success</string>
+    <string name="numberphone_error">Insert a valid number phone</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="create_account">Create account</string>
+    <string name="my_account">My Account</string>
+    <string name="menu">MENU</string>
+    <string name="view_mode">View mode</string>
 
 </resources>

@@ -1,21 +1,19 @@
 package com.example.depeat.ui.activities.adapters;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.example.depeat.R;
 import com.example.depeat.datamodels.Resturant;
-import com.example.depeat.ui.activities.RegisterActivity;
 import com.example.depeat.ui.activities.ShopActivity;
 import java.util.ArrayList;
 
@@ -26,12 +24,14 @@ public class ResturantAdapter extends RecyclerView.Adapter {
     private boolean isGrid;
     Context context;
 
-
-
-    public ResturantAdapter(Context context, ArrayList<Resturant> data) {
+    public ResturantAdapter(Context context) {
         inflater = LayoutInflater.from(context);
-        this.data = data;
+        this.data = new ArrayList<>();
         this.context = context;
+    }
+
+    public void setRestaurant (ArrayList<Resturant> data){
+        this.data = data;
     }
 
     @NonNull
@@ -52,13 +52,9 @@ public class ResturantAdapter extends RecyclerView.Adapter {
         vh.resturantName.setText(data.get(pos).getNome());
         vh.resturantIndirizzo.setText(data.get(pos).getIndirizzo());
         vh.resturantMinordine.setText(data.get(pos).getMinOrdine());
-       // if (!isGrid) {
-            vh.image_cuoreR.setImageResource(R.drawable.likerosso);
-            vh.image_cuoreN.setImageResource(R.drawable.likenero);
-            vh.image_resturant.setImageResource(data.get(pos).getSrc());
-        //}
-
-        //Glide.with(context).load()    Caricare immagine da remoto
+        vh.image_cuoreR.setImageResource(R.drawable.likerosso);
+        vh.image_cuoreN.setImageResource(R.drawable.likenero);
+        Glide.with(context).load(data.get(pos).getImage_url()).into(vh.image_resturant);
     }
 
     @Override
@@ -71,7 +67,16 @@ public class ResturantAdapter extends RecyclerView.Adapter {
     }
 
     public void setGrid(boolean grid) {
-        isGrid = grid;
+        isGrid = !grid;
+    }
+
+    public ArrayList<Resturant> getData() {
+        return data;
+    }
+
+    public void setData(ArrayList<Resturant> data) {
+        this.data = data;
+        notifyDataSetChanged();
     }
 
     public class ResturantViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -94,9 +99,7 @@ public class ResturantAdapter extends RecyclerView.Adapter {
             B_condividi = itemView.findViewById(R.id.B_condividi);
 
 
-
             itemView.setOnClickListener(this);
-            //if (!isGrid) {
                 image_cuoreN.setOnClickListener(this);
                 image_cuoreR.setOnClickListener(this);
 
@@ -104,13 +107,13 @@ public class ResturantAdapter extends RecyclerView.Adapter {
                 cardview.setOnClickListener(this);
 
                 B_condividi.setOnClickListener(this);
-           // }
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.Bmenu) {
                 Intent i = new Intent(v.getContext(), ShopActivity.class);
+                i.putExtra("resources",data.get(getAdapterPosition()).getId());
                 v.getContext().startActivity(i);
             } else if (v.getId() == R.id.imageCuoreN) {
                 image_cuoreN.setVisibility(View.GONE);

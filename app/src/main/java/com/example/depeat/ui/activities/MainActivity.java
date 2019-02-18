@@ -1,63 +1,87 @@
 package com.example.depeat.ui.activities;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.depeat.R;
 import com.example.depeat.datamodels.Resturant;
+import com.example.depeat.datamodels.services.RestController;
 import com.example.depeat.ui.activities.adapters.ResturantAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Response.Listener<String>,Response.ErrorListener  {
 
     RecyclerView resturantRV;
     RecyclerView.LayoutManager layoutManager;
     ResturantAdapter adapter;
-    ArrayList<Resturant> arrayList;
-
-    Resturant r1 = new Resturant("Forno Impero", "Indirizzo:Via dei mille", "Minimo ordine: $7", R.drawable.a9);
-    Resturant r2 = new Resturant("Il carretto", "Indirizzo:Viale Europa", "Minimo ordine:$5", R.drawable.a9);
-    Resturant r3 = new Resturant("Peri peri", "Indirizzo:Via stazione", "Minimo ordine:$7", R.drawable.a9);
-    Resturant r4 = new Resturant("Peri peri", "Indirizzo:Via stazione", "Minimo ordine:$7", R.drawable.a9);
-    Resturant r5 = new Resturant("Peri peri", "Indirizzo:Via stazione", "Minimo ordine:$7", R.drawable.a9);
+    public ArrayList<Resturant> restaurantArraylist;
+    private String sharedPrefFile = "com.example.android.hellosharedprefs";
+    SharedPreferences mPreferences;
+    private boolean stato;
+    RestController restController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        restaurantArraylist = new ArrayList<>();
+        //request get
+        restController = new RestController(this);
+        restController.getRequest(Resturant.ENDPOINT,this,this);
+
         resturantRV = findViewById(R.id.places_rv);
         layoutManager = new LinearLayoutManager(this);
-        adapter = new ResturantAdapter(this, getData());
 
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+
+        stato = mPreferences.getBoolean("Stato griglia", false);
+        if (!stato) {
+            layoutManager = new LinearLayoutManager(this);
+        } else {
+            layoutManager = new GridLayoutManager(this, 2);
+        }
+
+        adapter = new ResturantAdapter(this);
         resturantRV.setLayoutManager(layoutManager);
         resturantRV.setAdapter(adapter);
-    }
 
-    private ArrayList<Resturant> getData() {
-
-        arrayList = new ArrayList<>();
-        arrayList.add(r1);
-        arrayList.add(r2);
-        arrayList.add(r3);
-        arrayList.add(r4);
-        arrayList.add(r5
-        );
-
-        return arrayList;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
+        layoutManager = mPreferences.getBoolean("Stato griglia", false) ? new GridLayoutManager(this, 2) : new LinearLayoutManager(this);
+
         return true;
     }
 
@@ -74,13 +98,46 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, CheckoutActivity.class));
 
         } else if (item.getItemId() == R.id.Grid_menu) {
-            adapter.setGrid(!adapter.isGrid());
+
+            stato = mPreferences.getBoolean("Stato griglia", false);
+
+            adapter.setGrid(stato);
+
+            SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+            preferencesEditor.putBoolean("Stato griglia", adapter.isGrid());
+
+
             layoutManager = adapter.isGrid() ? new GridLayoutManager(this, 2) : new LinearLayoutManager(this);
             resturantRV.setLayoutManager(layoutManager);
             resturantRV.setAdapter(adapter);
+            adapter = new ResturantAdapter(this);
 
+            preferencesEditor.apply();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Log.i("error",error.getMessage());
+    }
+
+    @Override
+    public void onResponse(String response) {
+
+        try {
+            JSONArray jsonArray = new JSONArray(response);
+
+            for(int i = 0; i<jsonArray.length();i++){
+                Resturant resturant = new Resturant(jsonArray.getJSONObject(i));
+                restaurantArraylist.add(resturant);
+            }
+
+            adapter.setData(restaurantArraylist);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        return super.onOptionsItemSelected(item);
     }
 }
