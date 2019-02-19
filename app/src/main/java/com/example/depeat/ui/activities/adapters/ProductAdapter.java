@@ -6,14 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.depeat.R;
 import com.example.depeat.datamodels.Product;
-import com.example.depeat.datamodels.Resturant;
 import com.example.depeat.ui.activities.OnQuantityChangeListener;
-
 import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +26,6 @@ public class ProductAdapter extends RecyclerView.Adapter {
     public void setOnQuantityChangeListener(OnQuantityChangeListener onQuantityChangeListener) {
         this.onQuantityChangeListener = onQuantityChangeListener;
     }
-
 
     public ProductAdapter(Context context, ArrayList<Product> prodotti) {
         this.context = context;
@@ -57,7 +52,6 @@ public class ProductAdapter extends RecyclerView.Adapter {
 
         ph.nomeProdotto.setText(prodotti.get(position).getNome());
         ph.quantity.setText(String.valueOf(prodotti.get(position).getQuantita()));
-
     }
 
     @Override
@@ -68,7 +62,6 @@ public class ProductAdapter extends RecyclerView.Adapter {
     public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView nomeProdotto, prezzo, plus, quantity, less;
-
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,7 +74,6 @@ public class ProductAdapter extends RecyclerView.Adapter {
 
             plus.setOnClickListener(this);
             less.setOnClickListener(this);
-
         }
 
         @Override
@@ -90,16 +82,13 @@ public class ProductAdapter extends RecyclerView.Adapter {
 
             if (v.getId() == R.id.plusTV) {
                 p.increaseQuantitiy();
-                notifyItemChanged(getAdapterPosition());
                 onQuantityChangeListener.onChange(p.getPrezzo());
-
-
             } else if (v.getId() == R.id.lessTV) {
-                p.decreaseQuantitiy();
-                notifyItemChanged(getAdapterPosition());
-                onQuantityChangeListener.onChange((p.getPrezzo() * (-1)));
+                if (p.getQuantita() > 0) {
+                    p.decreaseQuantitiy();
+                    onQuantityChangeListener.onChange(p.getPrezzo() * (-1));
+                }
             }
-
             notifyItemChanged(getAdapterPosition());
         }
     }
